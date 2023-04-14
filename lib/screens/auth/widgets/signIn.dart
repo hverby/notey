@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note/screens/home/homePage.dart';
 import 'package:note/shared/widgets/colors.dart';
 
 import '../../../shared/widgets/text_input.dart';
@@ -90,8 +91,7 @@ class _SignInState extends State<SignIn> {
                                       _isLoading = true;
                                     });
 
-                                    print(emailController.value.text);
-                                    print(passController.value.text);
+                                    Navigator.pushReplacementNamed(context, MyHomePage.routeName);
 
                                     Future.delayed(Duration(seconds: 2), (){
                                       setState(() {

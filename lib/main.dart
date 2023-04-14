@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note/screens/auth/authPage.dart';
+import 'package:note/screens/home/homePage.dart';
 import 'package:note/shared/widgets/colors.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/auth',
 
       routes: {
-        '/auth': (context) => AuthPage(),
+        AuthPage.routeName: (context) => AuthPage(),
+        MyHomePage.routeName: (context) => MyHomePage(),
         //DetailPage.routeName: (context) => DetailPage(),
         //CartPage.routeName: (context) => CartPage(),
       },

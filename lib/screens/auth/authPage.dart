@@ -3,6 +3,7 @@ import 'package:note/screens/auth/widgets/register.dart';
 import 'package:note/screens/auth/widgets/signIn.dart';
 
 class AuthPage extends StatefulWidget {
+  static const routeName = "/auth";
   const AuthPage({Key? key}) : super(key: key);
 
   @override
