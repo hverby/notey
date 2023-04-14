@@ -13,6 +13,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
   bool _isLoading = false;
 
   @override
@@ -52,14 +54,20 @@ class _SignInState extends State<SignIn> {
                             children: [
                               SizedBox(height: 110.0),
                               TextFormField(
+                                controller: emailController,
                                 autofocus: true,
                                 keyboardType: TextInputType.emailAddress,
                                 //maxLines: 15,
                                 //minLines: 10,
                                 decoration: textInputDecoration.copyWith(hintText: 'test@gmail.com', label: Text("Email")),
+                                validator: (val) => !val!.contains("@")  ? 'Enter a valid email' : null,
+                                onChanged: (val) {
+                                  //setState(() => password = val);
+                                },
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: passController,
                                 obscureText: true,
                                 decoration: textInputDecoration.copyWith(hintText: 'Password'),
                                 validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
@@ -77,16 +85,22 @@ class _SignInState extends State<SignIn> {
                                   child: CircularProgressIndicator(color: Colors.white),
                                 ),
                                 onPressed: (){
-                                  setState(() {
-                                    _isLoading = true;
-                                  });
-                                  Future.delayed(Duration(seconds: 2), (){
+                                  if (_formKey.currentState!.validate()) {
                                     setState(() {
-                                      _isLoading = false;
+                                      _isLoading = true;
                                     });
-                                    //Provider.of<AuthProvider>(context, listen: false).login();
-                                    //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(title: "Note List")));
-                                  });
+
+                                    print(emailController.value.text);
+                                    print(passController.value.text);
+
+                                    Future.delayed(Duration(seconds: 2), (){
+                                      setState(() {
+                                        _isLoading = false;
+                                      });
+                                      //Provider.of<AuthProvider>(context, listen: false).login();
+                                      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(title: "Note List")));
+                                    });
+                                  }
                                 },
                               )
                             ],
