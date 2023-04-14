@@ -58,6 +58,7 @@ class _SignInState extends State<SignIn> {
                                 controller: emailController,
                                 autofocus: true,
                                 keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
                                 //maxLines: 15,
                                 //minLines: 10,
                                 decoration: textInputDecoration.copyWith(hintText: 'test@gmail.com', label: Text("Email")),
