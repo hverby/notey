@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<NoteProvider>(create: (_) => NoteProvider()),
+        //Provider<NoteProvider>(create: (_) => NoteProvider()),
+        ChangeNotifierProvider.value(value: NoteProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

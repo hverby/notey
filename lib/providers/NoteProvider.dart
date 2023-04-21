@@ -5,9 +5,7 @@ import 'package:note/models/Note.dart';
 
 class NoteProvider with ChangeNotifier{
 
-  List<Note> _notes = [Note(title: "The standard Lorem Ipsum passage, used since the 1500s",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-      dateTime: DateTime.now(), color: Colors.black45)];
+  List<Note> _notes = [];
 
   void addNote(Note note){
     _notes.add(note);
@@ -19,6 +17,7 @@ class NoteProvider with ChangeNotifier{
   void deleteNote(DateTime dateTime){
     int index = _notes.indexWhere((element) => element.dateTime == dateTime);
     _notes.removeAt(index);
+    //_notes.remove(_notes.firstWhere((element) => element.dateTime == dateTime));
     notifyListeners();
   }
 

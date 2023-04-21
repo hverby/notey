@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/Note.dart';
 import '../../providers/NoteProvider.dart';
 import '../../shared/widgets/colors.dart';
 import '../add/addPage.dart';
@@ -45,23 +46,29 @@ class _MyHomePageState extends State<MyHomePage> {
                       gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                       itemCount: noteProvider.allNotes.length,
                       itemBuilder: (context, i){
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(noteProvider.allNotes[i].title, style: TextStyle(fontFamily: 'ceraBold', fontSize: 25, color: Colors.black),),
-                          SizedBox(height: 10,),
-                          Text(noteProvider.allNotes[i].desc, style: TextStyle(fontSize: 20, color: Colors.black))
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: noteProvider.allNotes[i].color,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(color: Colors.black, width: 1)
-                      ),
-                    );
-                  },
+                        Note note = noteProvider.allNotes[i];
+                        return GestureDetector(
+                          onDoubleTap: (){
+                            Provider.of<NoteProvider>(context, listen: false).deleteNote(note.dateTime);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(note.title, style: TextStyle(fontFamily: 'ceraBold', fontSize: 25, color: Colors.black),),
+                                SizedBox(height: 10,),
+                                Text(note.desc, style: TextStyle(fontSize: 20, color: Colors.black))
+                              ],
+                            ),
+                            decoration: BoxDecoration(
+                                color: noteProvider.allNotes[i].color,
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                border: Border.all(color: Colors.black, width: 1)
+                            ),
+                          ),
+                        );
+                      },
                 );
               },
             )
